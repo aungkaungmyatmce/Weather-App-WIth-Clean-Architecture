@@ -1,20 +1,18 @@
 import 'dart:io';
-
 import 'package:dartz/dartz.dart';
-import 'package:weather_app_with_clean_architecture/data/core/error/exception.dart';
-import 'package:weather_app_with_clean_architecture/data/data_sources/weather_remote_data_source.dart';
-import 'package:weather_app_with_clean_architecture/data/models/WeatherModel.dart';
-
-import 'package:weather_app_with_clean_architecture/domain/entities/app_error.dart';
-
-import 'package:weather_app_with_clean_architecture/domain/entities/weather_entity.dart';
-
+import '../../domain/entities/app_error.dart';
+import '../../domain/entities/weather_entity.dart';
 import '../../domain/repositories/weather_repository.dart';
+import '../core/network/error/exception.dart';
+import '../data_sources/weather_local_data_source.dart';
+import '../data_sources/weather_remote_data_source.dart';
+import '../models/WeatherModel.dart';
 
 class WeatherRepositoryImpl extends WeatherRepository {
   final WeatherRemoteDataSource remoteDataSource;
+  final WeatherLocalDataSource localDataSource;
 
-  WeatherRepositoryImpl(this.remoteDataSource);
+  WeatherRepositoryImpl(this.remoteDataSource, this.localDataSource);
 
   @override
   Future<Either<AppError, WeatherModel>> getCurrentWeather(
@@ -35,13 +33,52 @@ class WeatherRepositoryImpl extends WeatherRepository {
     try {
       final weather = await remoteDataSource.getForecastWeather(params);
       return Right(weather);
-    }on ContentNotFoundException{
+    } on ContentNotFoundException {
       return Left(AppError(AppErrorType.contentNotFound));
-    }
-    on SocketException {
+    } on SocketException {
       return Left(AppError(AppErrorType.network));
     } on Exception {
       return Left(AppError(AppErrorType.api));
+    }
+  }
+
+  @override
+  Future<Either<AppError, bool>> checkIfCityFavorite(String cityName) async {
+    try {
+      final response = await localDataSource.checkIfCityFavourite(cityName);
+      return Right(response);
+    } on Exception {
+      return left(AppError(AppErrorType.database));
+    }
+  }
+
+  @override
+  Future<Either<AppError, void>> deleteFavoriteCity(String cityName) async {
+    try {
+      final response = await localDataSource.deleteCity(cityName);
+      return Right(response);
+    } on Exception {
+      return left(AppError(AppErrorType.database));
+    }
+  }
+
+  @override
+  Future<Either<AppError, List<String>>> getFavoriteCities() async {
+    try {
+      final response = await localDataSource.getCities();
+      return Right(response);
+    } on Exception {
+      return left(AppError(AppErrorType.database));
+    }
+  }
+
+  @override
+  Future<Either<AppError, void>> saveCity(String cityName) async {
+    try {
+      final response = await localDataSource.saveCity(cityName);
+      return Right(response);
+    } on Exception {
+      return left(AppError(AppErrorType.database));
     }
   }
 }

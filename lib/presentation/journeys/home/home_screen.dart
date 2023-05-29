@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../common/constants/route_constants.dart';
 import '../detail/weather_detail_argument.dart';
+import '../drawer/navigation_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -17,7 +18,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        //drawer: const NavDrawer(),
+        appBar: AppBar(
+          title: Text(
+            'Weather App',
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+        ),
+        drawer: const NavDrawer(),
         body: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),

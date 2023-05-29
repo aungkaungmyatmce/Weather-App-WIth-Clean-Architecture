@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_app_with_clean_architecture/common/extensions/size_extensions.dart';
-
+import '../../../common/extensions/size_extensions.dart';
 import '../../../common/constants/size_constants.dart';
 import '../../blocs/loading/loading_cubit.dart';
 import 'loading_circle.dart';
@@ -15,7 +14,6 @@ class LoadingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<LoadingCubit, bool>(
       builder: (context, shouldShow) {
-        print(shouldShow);
         return Stack(
           fit: StackFit.expand,
           children: [

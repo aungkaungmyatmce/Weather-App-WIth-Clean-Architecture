@@ -1,4 +1,4 @@
-import 'package:weather_app_with_clean_architecture/domain/entities/weather_entity.dart';
+import '../../domain/entities/weather_entity.dart';
 
 /// location : {"name":"London","region":"City of London, Greater London","country":"United Kingdom","lat":51.52,"lon":-0.11,"tz_id":"Europe/London","localtime_epoch":1685032280,"localtime":"2023-05-25 17:31"}
 /// current : {"temp_c":17.0,"temp_f":62.6,"is_day":1,"condition":{"text":"Partly cloudy","icon":"//cdn.weatherapi.com/weather/64x64/day/116.png"},"humidity":55,"cloud":75,"uv":5.0}

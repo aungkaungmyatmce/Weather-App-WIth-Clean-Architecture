@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app_with_clean_architecture/presentation/journeys/detail/weather_detail_argument.dart';
-
 import '../common/constants/route_constants.dart';
+import 'journeys/detail/weather_detail_argument.dart';
 import 'journeys/detail/weather_detail_screen.dart';
+import 'journeys/favorite/favorite_screen.dart';
 import 'journeys/home/home_screen.dart';
 
 class Routes {
@@ -14,6 +14,6 @@ class Routes {
                   setting.arguments as WeatherDetailArguments,
             ),
         RouteList.noti: (context) => Container(),
-        RouteList.favorite: (context) => Container(),
+        RouteList.favorite: (context) => FavoriteScreen(),
       };
 }

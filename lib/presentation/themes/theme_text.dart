@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:weather_app_with_clean_architecture/common/extensions/size_extensions.dart';
+import '../../common/extensions/size_extensions.dart';
 import '../../common/constants/size_constants.dart';
 import 'app_color.dart';
 

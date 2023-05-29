@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app_with_clean_architecture/common/extensions/size_extensions.dart';
+import '../../common/extensions/size_extensions.dart';
 import '../../common/constants/size_constants.dart';
 import '../../domain/entities/app_error.dart';
 
@@ -31,15 +31,9 @@ class AppErrorWidget extends StatelessWidget {
           ButtonBar(
             children: [
               TextButton(
-                onPressed: () => onPressed,
+                onPressed: () => onPressed(),
                 child: Text('Retry'),
               ),
-              // TextButton(
-              //   onPressed: () => Wiredash.of(context)?.show(),
-              //   child: Text(
-              //     TranslationConstants.feedback,
-              //   ),
-              // ),
             ],
           ),
         ],

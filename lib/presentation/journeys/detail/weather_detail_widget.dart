@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app_with_clean_architecture/common/extensions/size_extensions.dart';
-import 'package:weather_app_with_clean_architecture/domain/entities/weather_entity.dart';
-import 'package:weather_app_with_clean_architecture/presentation/journeys/detail/format_date_widget.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../common/extensions/size_extensions.dart';
 import '../../../common/constants/size_constants.dart';
-import '../../../data/core/api_constants.dart';
+import '../../../data/core/network/api_constants.dart';
+import '../../../domain/entities/weather_entity.dart';
+import '../../blocs/favourite/favourite_cubit.dart';
+import 'format_date_widget.dart';
 
 class WeatherDetailWidget extends StatelessWidget {
   final WeatherEntity weather;
@@ -16,7 +17,32 @@ class WeatherDetailWidget extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.favorite_border)),
+          BlocBuilder<FavoriteCubit, FavoriteState>(
+            builder: (context, state) {
+              if (state is IsFavouriteCity) {
+                return GestureDetector(
+                  onTap: () {
+                    BlocProvider.of<FavoriteCubit>(context).toggleFavouriteCity(
+                        cityName: weather.location!.name!,
+                        isFavourite: state.isCityFavourite);
+                  },
+                  child: Icon(
+                    state.isCityFavourite
+                        ? Icons.favorite
+                        : Icons.favorite_border,
+                    color: Colors.white,
+                    size: Sizes.dimen_12.h,
+                  ),
+                );
+              } else {
+                return Icon(
+                  Icons.favorite_border,
+                  color: Colors.white,
+                  size: Sizes.dimen_12.h,
+                );
+              }
+            },
+          ),
           SizedBox(width: 20),
         ],
       ),
@@ -39,7 +65,7 @@ class WeatherDetailWidget extends StatelessWidget {
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
                 Text(
-                  "${weather.current!.tempC!.toStringAsFixed(0)} °",
+                  "${weather.current!.tempC!.toStringAsFixed(0)}° C",
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),

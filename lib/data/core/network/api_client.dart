@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart';
-import 'package:weather_app_with_clean_architecture/data/core/error/exception.dart';
 import 'api_constants.dart';
+import 'error/exception.dart';
 
 ///https://api.weatherapi.com/v1/forecast.json?key=dc2f0209b33642cbb72154206232505&q=London&days=3&aqi=no&alerts=no
 
@@ -18,7 +18,7 @@ class ApiClient {
 
     if (response.statusCode == 200) {
       return json.decode(response.body);
-    } else if (response.statusCode == 405) {
+    } else if (response.statusCode == 400) {
       throw ContentNotFoundException();
     } else {
       throw Exception(response.reasonPhrase);

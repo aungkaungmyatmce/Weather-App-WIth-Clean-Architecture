@@ -1,4 +1,4 @@
-import '../core/api_client.dart';
+import '../core/network/api_client.dart';
 import '../models/WeatherModel.dart';
 
 abstract class WeatherRemoteDataSource {
@@ -15,7 +15,6 @@ class WeatherRemoteDataSourceImpl extends WeatherRemoteDataSource {
       Map<String, dynamic> requestBody) async {
     final response = await _client.get('current.json', params: requestBody);
     final weather = WeatherModel.fromJson(response);
-    print(weather);
     return weather;
   }
 
@@ -24,7 +23,6 @@ class WeatherRemoteDataSourceImpl extends WeatherRemoteDataSource {
       Map<String, dynamic> requestBody) async {
     final response = await _client.get('forecast.json', params: requestBody);
     final weather = WeatherModel.fromJson(response);
-    print(weather);
     return weather;
   }
 }

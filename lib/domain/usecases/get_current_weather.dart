@@ -1,9 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:weather_app_with_clean_architecture/domain/entities/app_error.dart';
-import 'package:weather_app_with_clean_architecture/domain/entities/weather_entity.dart';
-import 'package:weather_app_with_clean_architecture/domain/repositories/weather_repository.dart';
-import 'package:weather_app_with_clean_architecture/domain/usecases/usecase.dart';
-
+import '../entities/weather_entity.dart';
+import 'usecase.dart';
+import '../entities/app_error.dart';
+import '../repositories/weather_repository.dart';
 import '../entities/current_weather_params.dart';
 
 class GetCurrentWeather extends UseCase<WeatherEntity, CurrentWeatherParams> {

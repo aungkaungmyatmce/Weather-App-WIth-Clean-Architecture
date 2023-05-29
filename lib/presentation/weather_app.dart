@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_app_with_clean_architecture/presentation/routes.dart';
-import 'package:weather_app_with_clean_architecture/presentation/themes/app_color.dart';
-import 'package:weather_app_with_clean_architecture/presentation/themes/theme_text.dart';
-
+import 'routes.dart';
+import 'themes/app_color.dart';
+import 'themes/theme_text.dart';
 import '../common/constants/route_constants.dart';
 import '../common/screenutil/screenutil.dart';
 import '../di/get_it.dart';
@@ -41,7 +40,7 @@ class _WeatherAppState extends State<WeatherApp> {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Movie App',
+        title: 'Weather App',
         theme: ThemeData(
           unselectedWidgetColor: AppColor.royalBlue,
           primaryColor: AppColor.vulcan,
